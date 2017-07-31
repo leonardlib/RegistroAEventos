@@ -14,7 +14,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.itextpdf.text.Image;
-import com.tyczj.extendedcalendarview.Event;
+//import com.tyczj.extendedcalendarview.Event;
 
 import java.text.DateFormat;
 import java.text.ParseException;

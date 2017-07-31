@@ -112,7 +112,7 @@
                 android:layout_height="2dp"
                 android:background="@color/background_gray" />
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -121,7 +121,7 @@
                     android:layout_height="350dp"
                     android:id="@+id/calendario_activacion"
                     />
-            </LinearLayout>
+            </LinearLayout>-->
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
