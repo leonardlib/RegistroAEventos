@@ -488,7 +488,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
      *                puede continuar.
      */
     private void getSignInResult(GoogleSignInResult result) {
-        if (result.isSuccess()) {
+        /*if (result.isSuccess()) {
 
             // Signed in successfully, show authenticated UI.
             final GoogleSignInAccount acct = result.getSignInAccount();
@@ -567,7 +567,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
             AlertDialog alert = builder.create();
             alert.show();
             // Signed out, show unauthenticated UI.
-        }
+        }*/
     }
 
 
@@ -601,6 +601,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
                         call.enqueue(new Callback<Response<Usuario>>() {
                             @Override
                             public void onResponse(Call<Response<Usuario>> call, retrofit2.Response<Response<Usuario>> response) {
+                                System.out.println(response);
                                 login(response);
                             }
 
@@ -676,6 +677,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
             loginSimplePd.dismiss();
         }
         Response<Usuario> body = response.body();
+        System.out.println(body.data);
         if (body != null) {
             Sesion.cargarSesion(body.data);
             ((LoginActivity) getActivity()).startHomeActivity();

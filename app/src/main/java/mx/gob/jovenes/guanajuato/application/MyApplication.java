@@ -38,7 +38,7 @@ public class MyApplication extends MultiDexApplication {
 
     //public static final String BASE_URL = "http://10.0.7.119/GuanajovenWeb/public/api/";
 
-    public static final String BASE_URL = "http://10.0.7.40/GuanajovenWeb/public/api/";
+    public static final String BASE_URL = "http://192.168.0.53/RegistroAEventosWeb/public/api/";
 
 
     /**

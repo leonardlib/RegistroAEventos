@@ -227,7 +227,7 @@ public class HomeFragment extends CustomFragment {
             } catch (Exception e) {
                 System.err.println("que pendejo...");
             }
-        });*/
+        });
 
 
         SlideHandler.initSlider(slidePublicidad, "left", new Funcion() {
@@ -292,7 +292,7 @@ public class HomeFragment extends CustomFragment {
             public void onFailure(retrofit2.Call<Response<ArrayList<Publicidad>>> call, Throwable t) {
                 Log.d("Error", "Error");
             }
-        });
+        });*/
         return v;
     }
 
