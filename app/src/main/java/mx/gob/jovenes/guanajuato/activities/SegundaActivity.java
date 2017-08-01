@@ -139,9 +139,9 @@ public class SegundaActivity extends AppCompatActivity {
                 case R.id.nav_redes_sociales:
                     fragment = RedesSocialesFragment.newInstance(R.id.nav_redes_sociales, R.string.redes_sociales, RedesSocialesFragment.class);
                     break;
-                case R.id.boton_ayuda:
+                /*case R.id.boton_ayuda:
                     //fragment = AyudaFragment.newInstance(R.id.boton_help, R.string.acerca_de, AyudaFragment.class);
-                    break;
+                    break;*/
                 case R.id.nav_promociones:
                     fragment = EmpresaFragment.newInstance(R.id.nav_promociones, R.string.nav_promociones, EmpresaFragment.class);
                     break;

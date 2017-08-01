@@ -28,28 +28,15 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Intent intent;
 
-        //Instancia de las preferencias;
-        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        //Lanza vista de home si existe alguna sesión guardada, caso contraria lanza la
+        //vista de iniciar sesión
+        Sesion sesion = new Sesion(getApplicationContext());
 
-        if(!prefs.getBoolean(BienvenidaActivity.BIENVENIDA_KEY, false)){
-            intent = new Intent(this, BienvenidaActivity.class);
+        if (Sesion.getUsuario().getId() == 0 ) {
+            intent = new Intent(this, LoginActivity.class);
+        } else {
+            intent = new Intent(this, HomeActivity.class);
         }
-        else {
-            Sesion sesion = new Sesion(getApplicationContext());
-
-            System.err.println("------------------------------");
-            System.err.println(Sesion.getUsuario().getId());
-            System.err.println("-------------------------------");
-
-            if (Sesion.getUsuario().getId() == 0 ) {
-                intent = new Intent(this, LoginActivity.class);
-            } else {
-                intent = new Intent(this, HomeActivity.class);
-            }
-        }
-
-
-
 
         startActivity(intent);
         finish();

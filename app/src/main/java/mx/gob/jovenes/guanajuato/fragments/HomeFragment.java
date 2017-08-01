@@ -138,10 +138,10 @@ public class HomeFragment extends CustomFragment {
         botonNavigationDrawer = (ImageButton) v.findViewById(R.id.boton_navigation_drawer);
         botonCodigoGuanajoven = (Button) v.findViewById(R.id.boton_codigo_guanajoven);
         botonEventos = (Button) v.findViewById(R.id.boton_eventos);
-        botonPromociones = (Button) v.findViewById(R.id.boton_promociones);
+        //botonPromociones = (Button) v.findViewById(R.id.boton_promociones);
         botonConvocatorias = (Button) v.findViewById(R.id.boton_convocatorias);
-        botonRedesSociales = (Button) v.findViewById(R.id.boton_redes_sociales);
-        botonChat = (Button) v.findViewById(R.id.boton_chat);
+        //botonRedesSociales = (Button) v.findViewById(R.id.boton_redes_sociales);
+        //botonChat = (Button) v.findViewById(R.id.boton_chat);
 
         textViewBolsaTrabajo = (TextView) v.findViewById(R.id.textview_bolsa_de_trabajo);
 
@@ -197,7 +197,7 @@ public class HomeFragment extends CustomFragment {
             }
         });
 
-        botonRedesSociales.setOnClickListener((View) -> {
+        /*botonRedesSociales.setOnClickListener((View) -> {
             try {
                 Intent intent = new Intent(this.getContext(), SegundaActivity.class);
                 intent.putExtra(MENU_ID, R.id.nav_redes_sociales);
@@ -227,7 +227,7 @@ public class HomeFragment extends CustomFragment {
             } catch (Exception e) {
                 System.err.println("que pendejo...");
             }
-        });
+        });*/
 
 
         SlideHandler.initSlider(slidePublicidad, "left", new Funcion() {
@@ -334,17 +334,17 @@ public class HomeFragment extends CustomFragment {
      * @throws ParseException
      */
     public void setValoresSesion() throws ParseException {
-        FirebaseMessaging.getInstance().subscribeToTopic("mx.gob.jovenes.guanajuato.Guanajoven");
-        FirebaseInstanceId.getInstance().getToken();
-        String token = prefs.getString(FirebaseInstanceIDService.TOKEN, null);
+        //FirebaseMessaging.getInstance().subscribeToTopic("mx.gob.jovenes.guanajuato.Guanajoven");
+        //FirebaseInstanceId.getInstance().getToken();
+        //String token = prefs.getString(FirebaseInstanceIDService.TOKEN, null);
         int idUsuario = Sesion.getUsuario().getId();
-        Call<Response<Boolean>> call = notificacionAPI.enviarToken(
+        /*Call<Response<Boolean>> call = notificacionAPI.enviarToken(
                 token,
                 idUsuario,
                 "android"
-        );
+        );*/
 
-        call.enqueue(new Callback<Response<Boolean>>() {
+        /*call.enqueue(new Callback<Response<Boolean>>() {
             @Override
             public void onResponse(Call<Response<Boolean>> call, retrofit2.Response<Response<Boolean>> response) {
                 Response<Boolean> body = response.body();
@@ -361,7 +361,7 @@ public class HomeFragment extends CustomFragment {
             public void onFailure(Call<Response<Boolean>> call, Throwable t) {
 
             }
-        });
+        });*/
     }
 
 

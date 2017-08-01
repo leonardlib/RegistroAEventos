@@ -34,8 +34,8 @@ public class StartFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_start, container, false);
 
         btnLogin = (Button) v.findViewById(R.id.btn_login);
-        btnRegistrar = (Button) v.findViewById(R.id.btn_registrar);
-        botonHelp = (ImageButton) v.findViewById(R.id.boton_ayuda);
+        //btnRegistrar = (Button) v.findViewById(R.id.btn_registrar);
+        //botonHelp = (ImageButton) v.findViewById(R.id.boton_ayuda);
 
         btnLogin.setOnClickListener((View) -> {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -43,13 +43,13 @@ public class StartFragment extends Fragment {
                 ft.replace(R.id.login_fragment_container, f).addToBackStack(null).commit();
         });
 
-        btnRegistrar.setOnClickListener((View) -> {
+        /*btnRegistrar.setOnClickListener((View) -> {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 Fragment f = new RegistrarFragment();
                 ft.replace(R.id.login_fragment_container, f).addToBackStack(null).commit();
-        });
+        });*/
 
-        botonHelp.setOnClickListener((View) -> {
+        /*botonHelp.setOnClickListener((View) -> {
             try {
                 Fragment fragment = new AyudaFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -59,7 +59,7 @@ public class StartFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        });
+        });*/
 
         //Cerrar el teclado cuando se abra el fragment
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);

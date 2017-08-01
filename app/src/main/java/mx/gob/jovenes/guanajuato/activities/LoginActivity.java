@@ -18,8 +18,6 @@ import mx.gob.jovenes.guanajuato.fragments.StartFragment;
  * Fecha: 02/05/2016
  */
 public class LoginActivity extends AppCompatActivity {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +54,4 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(i);
         this.finish();
     }
-
-
-
 }

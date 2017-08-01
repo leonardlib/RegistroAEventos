@@ -91,26 +91,26 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
 
 
     //Elementos para el login con Google
-    private GoogleSignInOptions googleSignInOptions;
+    /*private GoogleSignInOptions googleSignInOptions;
     private GoogleApiClient googleApiClient;
     private GoogleSignInApi googleSignInApi;
     private Button googleSignInButton;
-    private ProgressDialog loginGooglePd;
+    private ProgressDialog loginGooglePd;*/
     private ImageButton btnBack;
 
     //Elementos para el login con Facebook
-    private Button fbButton;
+    /*private Button fbButton;
     private LoginButton fb;
     private CallbackManager callbackManager;
     private AccessTokenTracker accessTokenTracker;
-    private ProfileTracker profileTracker;
+    private ProfileTracker profileTracker;*/
 
     //Elementos de la interfaz
     private ProgressDialog loginSimplePd;
     private EditText contrasenaEt;
     private EditText correoEt;
     private Button loginButton;
-    private TextView recuperarPasswordTv;
+    //private TextView recuperarPasswordTv;
 
     //Utilidades Retrofit y SharedPreferences
     private Retrofit retrofit;
@@ -139,10 +139,10 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
     @Override
     public void onResume(){
         super.onResume();
-        googleApiClient.connect();
+        /*googleApiClient.connect();
         if(googleApiClient.isConnected()){
             Auth.GoogleSignInApi.signOut(googleApiClient);
-        }
+        }*/
     }
 
     /**
@@ -151,18 +151,18 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
     @Override
     public void onStop() {
         super.onStop();
-        googleApiClient.disconnect();
+        /*googleApiClient.disconnect();
 
         googleApiClient.stopAutoManage(getActivity());
-        googleApiClient.disconnect();
+        googleApiClient.disconnect();*/
         if (loginSimplePd != null) {
             loginSimplePd.dismiss();
             loginSimplePd = null;
         }
-        if (loginGooglePd != null) {
+        /*if (loginGooglePd != null) {
             loginGooglePd.dismiss();
             loginGooglePd = null;
-        }
+        }*/
     }
 
     /**
@@ -174,12 +174,12 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
         super.onCreate(savedInstanceState);
 
         //Se instancian las GoogleSignInOptions y el GoogleApiClient.
-        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        /*googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .requestProfile()
-                .build();
+                .build();*/
 
-        if(googleApiClient == null) {
+        /*if(googleApiClient == null) {
             googleApiClient = new GoogleApiClient.Builder(getActivity())
                     .enableAutoManage(getActivity(), new GoogleApiClient.OnConnectionFailedListener() {
                         @Override
@@ -189,11 +189,11 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
                     })
                     .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
                     .build();
-        }
+        }*/
 
 
         //Configuración de Facebook.
-        callbackManager = CallbackManager.Factory.create();
+        /*callbackManager = CallbackManager.Factory.create();
         accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldToken, AccessToken newToken) {
@@ -205,7 +205,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
             protected void onCurrentProfileChanged(Profile oldProfile, Profile newProfile) { }
         };
         accessTokenTracker.startTracking();
-        profileTracker.startTracking();
+        profileTracker.startTracking();*/
 
 
         //Instancia de las preferencias.
@@ -230,18 +230,18 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
         View v = inflater.inflate(R.layout.fragment_login, container, false);
 
         //Instancia y listener del botón de Google.
-        googleSignInButton = (Button) v.findViewById(R.id.btn_google);
-        googleSignInButton.setOnClickListener(this);
+        //googleSignInButton = (Button) v.findViewById(R.id.btn_google);
+        //googleSignInButton.setOnClickListener(this);
 
         //Instancia del botón de Facebook.
-        fbButton = (Button) v.findViewById(R.id.btn_facebook);
-        fb = (LoginButton) v.findViewById(R.id.lgn_btn_facebook);
+        //fbButton = (Button) v.findViewById(R.id.btn_facebook);
+        //fb = (LoginButton) v.findViewById(R.id.lgn_btn_facebook);
 
         //Instancia de los demás elementos de la vista.
         contrasenaEt = (EditText) v.findViewById(R.id.pass_et);
         correoEt = (EditText) v.findViewById(R.id.email_et);
         loginButton = (Button) v.findViewById(R.id.btn_iniciar_sesion);
-        recuperarPasswordTv = (TextView) v.findViewById(R.id.tv_recuperar_pass);
+        //recuperarPasswordTv = (TextView) v.findViewById(R.id.tv_recuperar_pass);
         btnBack = (ImageButton) v.findViewById(R.id.btn_back);
 
 
@@ -282,7 +282,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
 
         loginButton.setOnClickListener(this);
 
-        recuperarPasswordTv.setOnClickListener(this);
+        //recuperarPasswordTv.setOnClickListener(this);
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
@@ -298,7 +298,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        fbButton = (Button) view.findViewById(R.id.btn_facebook);
+        /*fbButton = (Button) view.findViewById(R.id.btn_facebook);
 
         fbButton.setPadding(30, 30, 30, 30);
         googleSignInButton.setPadding(28, 28, 28, 28);
@@ -311,7 +311,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
              * Método ejecutado cuando el inicio de sesión es exitoso, el parámetro recibido permite
              * obtener la información del usuario.
              * @param loginResult {LoginResult}
-             */
+             *//*
             @Override
             public void onSuccess(LoginResult loginResult) {
                 AccessToken accessToken = loginResult.getAccessToken();
@@ -324,7 +324,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
                              * con GraphRequest. Se obtiene un JSON con los dataos del usuario.
                              * @param object
                              * @param response
-                             */
+                             *//*
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 //Si el resultado ha sido exitoso, se ejecuta la AsyncTask LoginFacebookAsyncTask.
@@ -380,7 +380,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
                                                 du.setGenero(g);
                                                 u.setDatosUsuario(du);
 
-                                            /* make the API call */
+                                            /* make the API call *//*
                                                 new GraphRequest(
                                                         AccessToken.getCurrentAccessToken(),
                                                         "/"+u.getIdFacebook()+"/picture?redirect=false&type=large",
@@ -428,7 +428,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
 
             /**
              * Método que se ejecuta cuando el usuario cancela el logueo.
-             */
+             *//*
             @Override
             public void onCancel() {
                 OKDialog.showOKDialog(getActivity(), "Error al iniciar sesión",
@@ -439,7 +439,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
             /**
              * Método ejecutado al detectar un fallo en la conexión con el servidor
              * @param e {FacebookException}
-             */
+             *//*
             @Override
             public void onError(FacebookException e) {
                 OKDialog.showOKDialog(getActivity(), "Error al iniciar sesión",
@@ -447,7 +447,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
 
             }
         });
-        fbButton.setOnClickListener(this);
+        fbButton.setOnClickListener(this);*/
 
     }
 
@@ -465,14 +465,14 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             if (resultCode != Activity.RESULT_OK) {
-                if(loginGooglePd != null)
-                    loginGooglePd.dismiss();
+                /*if(loginGooglePd != null)
+                    loginGooglePd.dismiss();*/
 
             }
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             getSignInResult(result);
         } else {
-            callbackManager.onActivityResult(requestCode, resultCode, data);
+            //callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -575,13 +575,13 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
      * Método que realiza el cierre de sesión de Google.
      */
     private void signOut() {
-        if(googleApiClient.isConnected())
+        /*if(googleApiClient.isConnected())
             Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
                     new ResultCallback<Status>() {
                         @Override
                         public void onResult(Status status) {
                         }
-                    });
+                    });*/
     }
 
 
@@ -625,7 +625,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
 
                 break;
 
-            case R.id.btn_google:
+            /*case R.id.btn_google:
 
                 i = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
                 startActivityForResult(i, RC_SIGN_IN);
@@ -649,7 +649,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
                 ft.replace(R.id.login_fragment_container, f);
                 ft.addToBackStack(null);
                 ft.commit();
-                break;
+                break;*/
 
         }
     }
