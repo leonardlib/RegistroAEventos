@@ -93,7 +93,7 @@ public class ImageHandler {
 
 
     public static void start(ViewGroup panel, Context ctx) {
-        realm = MyApplication.getRealmInstance();
+        /*realm = MyApplication.getRealmInstance();
         RealmResults<Publicidad> results = realm.where(Publicidad.class)
                 .findAll();
         publicidad = realm.copyFromRealm(results);
@@ -104,6 +104,6 @@ public class ImageHandler {
         context = ctx;
 
         handlerPublicidad = new Handler();
-        startCambioPublicidadTask();
+        startCambioPublicidadTask();*/
     }
 }

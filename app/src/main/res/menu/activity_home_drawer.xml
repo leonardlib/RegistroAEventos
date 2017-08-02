@@ -9,7 +9,7 @@
                 android:icon="@drawable/ic_home"
                 android:title="@string/home"
                 android:visible="false"/>
-            <item
+            <!--<item
                 android:id="@+id/nav_perfil"
                 android:icon="@drawable/ic_perfil"
                 android:title="@string/mi_perfil" />
@@ -18,7 +18,7 @@
             <item
                 android:id="@+id/nav_codigo_guanajoven"
                 android:icon="@drawable/qr"
-                android:title="@string/codigo_guanajoven" />
+                android:title="@string/codigo_guanajoven" />-->
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_sesion"
@@ -36,7 +36,7 @@
                     android:icon="@drawable/ic_calendar"
                     android:title="@string/eventos"/>
 
-                <item
+                <!--<item
                     android:id="@+id/nav_convocatorias"
                     android:icon="@drawable/ic_convocatoria"
                     android:title="@string/convocatorias" />
@@ -61,7 +61,7 @@
                 <item
                     android:id="@+id/nav_chat_ayuda"
                     android:icon="@drawable/chat_grey"
-                    android:title="@string/chat" />
+                    android:title="@string/chat" />-->
 
 
 
@@ -72,9 +72,9 @@
     <item android:title="@string/general">
         <menu>
             <group android:checkableBehavior="single">
-                <item android:id="@+id/nav_regiones"
+                <!--<item android:id="@+id/nav_regiones"
                     android:icon="@drawable/ic_regiones"
-                    android:title="@string/regiones"/>
+                    android:title="@string/regiones"/>-->
                 <item
                     android:id="@+id/nav_acerca_de"
                     android:icon="@drawable/ayuda"

@@ -102,6 +102,7 @@ public class EventoFragment extends CustomFragment {
 
                 tvEmptyEvento.setVisibility(View.GONE);
 
+                System.out.println(response);
                 if(response.body().success) {
                     List<Evento> evn = response.body().data;
 

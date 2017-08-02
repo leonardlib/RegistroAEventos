@@ -77,8 +77,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private CircleImageView imagenUsuarioDrawer;
     private TextView nombreUsuarioDrawer;
     private TextView correoUsuarioDrawer;
-    private TextView puntajeDrawer;
-    private TextView posicionDrawer;
+    //private TextView puntajeDrawer;
+    //private TextView posicionDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,8 +120,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         imagenUsuarioDrawer = (CircleImageView) headerLayout.findViewById(R.id.imagen_usuario_drawer);
         nombreUsuarioDrawer = (TextView) headerLayout.findViewById(R.id.nombre_usuario_drawer);
         correoUsuarioDrawer = (TextView) headerLayout.findViewById(R.id.correo_usuario_drawer);
-        puntajeDrawer = (TextView) headerLayout.findViewById(R.id.textview_puntaje_drawer);
-        posicionDrawer = (TextView) headerLayout.findViewById(R.id.textview_posicion_drawer);
+        //puntajeDrawer = (TextView) headerLayout.findViewById(R.id.textview_puntaje_drawer);
+        //posicionDrawer = (TextView) headerLayout.findViewById(R.id.textview_posicion_drawer);
 
         //Si no se ha iniciado la Activity genera una nueva (Evita generar nuevas al rotar la pantalla).
         if (savedInstanceState == null) {
@@ -217,11 +217,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
                 this.finish();
                 break;
-            case R.id.nav_codigo_guanajoven:
+            /*case R.id.nav_codigo_guanajoven:
                 intent = new Intent(this, SegundaActivity.class);
                 intent.putExtra(MENU_ID, id);
                 startActivity(intent);
-                break;
+                break;*/
             default:
                 intent = new Intent(this, SegundaActivity.class);
                 intent.putExtra(MENU_ID, id);
@@ -272,8 +272,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         nombreUsuarioDrawer.setText(usuario.getDatosUsuario().getNombre() + " " + usuario.getDatosUsuario().getApellidoPaterno() + " " + usuario.getDatosUsuario().getApellidoMaterno());
         correoUsuarioDrawer.setText(usuario.getEmail());
-        puntajeDrawer.setText("Puntos: " + usuario.getPuntaje());
-        posicionDrawer.setText("Posición N° " + posicion);
+        //puntajeDrawer.setText("Puntos: " + usuario.getPuntaje());
+        //posicionDrawer.setText("Posición N° " + posicion);
     }
 
     @Override

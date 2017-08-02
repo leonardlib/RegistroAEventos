@@ -109,12 +109,12 @@ public class SegundaActivity extends AppCompatActivity {
                     fragment = HomeFragment.newInstance(R.id.nav_home,HomeFragment.class);
                     break;
                  */
-                case R.id.nav_perfil:
+                /*case R.id.nav_perfil:
                     fragment = EditarDatosFragment.newInstance(R.id.nav_perfil, R.string.datos_usuario, EditarDatosFragment.class);
                     break;
                 case R.id.nav_convocatorias:
                     fragment = ConvocatoriaFragment.newInstance(R.id.nav_convocatorias, R.string.convocatorias, ConvocatoriaFragment.class);
-                    break;
+                    break;*/
                 case R.id.nav_mis_eventos:
                     fragment = EventoFragment.newInstance(R.id.nav_mis_eventos, R.string.mis_eventos, EventoFragment.class);
                     break;
@@ -123,7 +123,7 @@ public class SegundaActivity extends AppCompatActivity {
                     fragment = AcercaDeFragment.newInstance(R.id.nav_acerca_de, R.string.acerca_de, AcercaDeFragment.class);
                     break;
 
-                case R.id.nav_historial_notificaciones:
+                /*case R.id.nav_historial_notificaciones:
                     fragment = NotificacionesFragment.newInstance(R.id.nav_historial_notificaciones, R.string.historial_notificaciones, NotificacionesFragment.class);
                     break;
 
@@ -139,12 +139,12 @@ public class SegundaActivity extends AppCompatActivity {
                 case R.id.nav_redes_sociales:
                     fragment = RedesSocialesFragment.newInstance(R.id.nav_redes_sociales, R.string.redes_sociales, RedesSocialesFragment.class);
                     break;
-                /*case R.id.boton_ayuda:
+                case R.id.boton_ayuda:
                     //fragment = AyudaFragment.newInstance(R.id.boton_help, R.string.acerca_de, AyudaFragment.class);
-                    break;*/
+                    break;
                 case R.id.nav_promociones:
                     fragment = EmpresaFragment.newInstance(R.id.nav_promociones, R.string.nav_promociones, EmpresaFragment.class);
-                    break;
+                    break;*/
             }
         } catch (IllegalAccessException e) {
             e.printStackTrace();

@@ -70,10 +70,10 @@ import retrofit2.Retrofit;
 public class HomeFragment extends CustomFragment {
     public final static String FECHA_ACTUALIZACION = "fecha_actualizacion";
     //Elementos gráficos
-    private ImageButton btnSlide;
-    private ViewGroup pnlPublicidad;
-    private ImageButton btnClose;
-    private View slidePublicidad;
+    //private ImageButton btnSlide;
+    //private ViewGroup pnlPublicidad;
+    //private ImageButton btnClose;
+    //private View slidePublicidad;
 
     public static String MENU_ID = "menu_id";
 
@@ -99,7 +99,7 @@ public class HomeFragment extends CustomFragment {
     FragmentTransaction fragmentTransaction;
     Fragment fragment = null;
 
-    private TextView textViewBolsaTrabajo;
+    //private TextView textViewBolsaTrabajo;
 
 
     //Al crearse el fragment se genera el singleton que contendrá la lista de anuncios disponibles
@@ -129,10 +129,10 @@ public class HomeFragment extends CustomFragment {
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
         //Elementos publicidad
-        pnlPublicidad = (ViewGroup) v.findViewById(R.id.pnl_publicidad);
+        /*pnlPublicidad = (ViewGroup) v.findViewById(R.id.pnl_publicidad);
         btnSlide = (ImageButton) v.findViewById(R.id.btn_slide);
         btnClose = (ImageButton) v.findViewById(R.id.close);
-        slidePublicidad = v.findViewById(R.id.slide_publicidad);
+        slidePublicidad = v.findViewById(R.id.slide_publicidad);*/
 
         //Elementos menu
         botonNavigationDrawer = (ImageButton) v.findViewById(R.id.boton_navigation_drawer);
@@ -143,14 +143,14 @@ public class HomeFragment extends CustomFragment {
         //botonRedesSociales = (Button) v.findViewById(R.id.boton_redes_sociales);
         //botonChat = (Button) v.findViewById(R.id.boton_chat);
 
-        textViewBolsaTrabajo = (TextView) v.findViewById(R.id.textview_bolsa_de_trabajo);
+        //textViewBolsaTrabajo = (TextView) v.findViewById(R.id.textview_bolsa_de_trabajo);
 
-        textViewBolsaTrabajo.setOnClickListener((View) -> {
+        /*textViewBolsaTrabajo.setOnClickListener((View) -> {
             enlace("http://jovenes.guanajuato.gob.mx/index.php/empresas-incluyentes/");
-        });
+        });*/
 
         //Listeners de publicidad
-        btnSlide.setOnClickListener((View) -> pnlPublicidad.animate().translationX(0).setListener(new AnimatorListenerAdapter() {
+        /*btnSlide.setOnClickListener((View) -> pnlPublicidad.animate().translationX(0).setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
@@ -158,7 +158,7 @@ public class HomeFragment extends CustomFragment {
                     }
                 }));
 
-        btnClose.setOnClickListener((View) -> pnlPublicidad.animate().translationX(pnlPublicidad.getWidth()));
+        btnClose.setOnClickListener((View) -> pnlPublicidad.animate().translationX(pnlPublicidad.getWidth()));*/
 
         //Listeners botones menu
 
@@ -167,15 +167,15 @@ public class HomeFragment extends CustomFragment {
             drawer.openDrawer(GravityCompat.START);
         });
 
-        botonCodigoGuanajoven.setOnClickListener((View) -> {
+        /*botonCodigoGuanajoven.setOnClickListener((View) -> {
             try {
                 Intent intent = new Intent(this.getContext(), SegundaActivity.class);
                 intent.putExtra(MENU_ID, R.id.nav_codigo_guanajoven);
                 startActivity(intent);
             } catch (Exception e) {
-                System.err.println("que pendejo...");
+                System.err.println("Error");
             }
-        });
+        });*/
 
         botonEventos.setOnClickListener((View) -> {
             try {
@@ -183,19 +183,19 @@ public class HomeFragment extends CustomFragment {
                 intent.putExtra(MENU_ID, R.id.nav_mis_eventos);
                 startActivity(intent);
             } catch (Exception e) {
-                System.err.println("que pendejo...");
+                System.err.println("Error");
             }
         });
 
-        botonConvocatorias.setOnClickListener((View) -> {
+        /*botonConvocatorias.setOnClickListener((View) -> {
             try {
                 Intent intent = new Intent(this.getContext(), SegundaActivity.class);
                 intent.putExtra(MENU_ID, R.id.nav_convocatorias);
                 startActivity(intent);
             } catch (Exception e) {
-                System.err.println("que pendejo...");
+                System.err.println("Error");
             }
-        });
+        });*/
 
         /*botonRedesSociales.setOnClickListener((View) -> {
             try {
@@ -205,7 +205,7 @@ public class HomeFragment extends CustomFragment {
 
                 startActivity(intent);
             } catch (Exception e) {
-                System.err.println("que pendejo...");
+                System.err.println("Error");
             }
         });
 
@@ -215,7 +215,7 @@ public class HomeFragment extends CustomFragment {
                 intent.putExtra(MENU_ID, R.id.nav_chat_ayuda);
                 startActivity(intent);
             } catch (Exception e) {
-                System.err.println("que pendejo...");
+                System.err.println("Error");
             }
         });
 
@@ -225,7 +225,7 @@ public class HomeFragment extends CustomFragment {
                 intent.putExtra(MENU_ID, R.id.nav_promociones);
                 startActivity(intent);
             } catch (Exception e) {
-                System.err.println("que pendejo...");
+                System.err.println("Error");
             }
         });
 
@@ -296,13 +296,13 @@ public class HomeFragment extends CustomFragment {
         return v;
     }
 
-    @Override
+    /*@Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         pnlPublicidad.animate()
                 .translationX(pnlPublicidad.getWidth());
 
-    }
+    }*/
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -321,12 +321,12 @@ public class HomeFragment extends CustomFragment {
         }
     }
 
-    @Override
+    /*@Override
     public void onStop() {
 
         super.onStop();
         ImageHandler.stopCambioPublicidadTask();
-    }
+    }*/
 
     /**
      * Asigna los valores de la sesión y la bitácora.
