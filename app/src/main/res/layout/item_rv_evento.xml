@@ -62,12 +62,12 @@
 
         </LinearLayout>
 
-        <ImageButton
+        <!--<ImageButton
             android:id="@+id/imagebutton_eliminar_evento"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/ic_eliminar"
-            android:visibility="gone"/>
+            android:visibility="gone"/>-->
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

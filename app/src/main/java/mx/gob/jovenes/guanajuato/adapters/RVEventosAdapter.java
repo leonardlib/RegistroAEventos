@@ -61,7 +61,7 @@ public class RVEventosAdapter extends RecyclerView.Adapter<RVEventosAdapter.Even
             holder.estado.setText("Evento abierto");
         }
 
-        holder.imageButtonEliminarEvento.setOnClickListener((View) -> {
+        /*holder.imageButtonEliminarEvento.setOnClickListener((View) -> {
             AlertDialog.Builder mensaje = new AlertDialog.Builder(context);
             mensaje.create();
 
@@ -80,7 +80,7 @@ public class RVEventosAdapter extends RecyclerView.Adapter<RVEventosAdapter.Even
 
             mensaje.show();
 
-        });
+        });*/
 
     }
 
@@ -109,7 +109,7 @@ public class RVEventosAdapter extends RecyclerView.Adapter<RVEventosAdapter.Even
             if (newFormat.before(fechafin)) {
                 return true;
             } else {
-                holder.imageButtonEliminarEvento.setVisibility(View.VISIBLE);
+                //holder.imageButtonEliminarEvento.setVisibility(View.VISIBLE);
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -132,7 +132,7 @@ public class RVEventosAdapter extends RecyclerView.Adapter<RVEventosAdapter.Even
         TextView descripcionTv;
         TextView fechaTv;
         TextView estado;
-        ImageButton imageButtonEliminarEvento;
+        //ImageButton imageButtonEliminarEvento;
 
         EventosViewHolder(View itemView) {
             super(itemView);
@@ -140,7 +140,7 @@ public class RVEventosAdapter extends RecyclerView.Adapter<RVEventosAdapter.Even
             descripcionTv = (TextView) itemView.findViewById(R.id.tv_descripcion);
             fechaTv = (TextView) itemView.findViewById(R.id.tv_fecha);
             estado = (TextView) itemView.findViewById(R.id.estado);
-            imageButtonEliminarEvento = (ImageButton) itemView.findViewById(R.id.imagebutton_eliminar_evento);
+            //imageButtonEliminarEvento = (ImageButton) itemView.findViewById(R.id.imagebutton_eliminar_evento);
 
             itemView.setOnClickListener((View) -> {
                     DetalleEventoFragment f = DetalleEventoFragment.newInstance(eventos.get(getAdapterPosition()).getIdEvento());
