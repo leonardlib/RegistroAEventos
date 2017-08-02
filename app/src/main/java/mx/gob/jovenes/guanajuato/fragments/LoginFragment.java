@@ -96,7 +96,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
     private GoogleSignInApi googleSignInApi;
     private Button googleSignInButton;
     private ProgressDialog loginGooglePd;*/
-    private ImageButton btnBack;
+    //private ImageButton btnBack;
 
     //Elementos para el login con Facebook
     /*private Button fbButton;
@@ -242,7 +242,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
         correoEt = (EditText) v.findViewById(R.id.email_et);
         loginButton = (Button) v.findViewById(R.id.btn_iniciar_sesion);
         //recuperarPasswordTv = (TextView) v.findViewById(R.id.tv_recuperar_pass);
-        btnBack = (ImageButton) v.findViewById(R.id.btn_back);
+        //btnBack = (ImageButton) v.findViewById(R.id.btn_back);
 
 
         //Se muestra mensaje cuando se gana el foco
@@ -261,14 +261,14 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
         });
 
         //Botón para presionar atrás y volver al menú inicial.
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        /*btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 InputMethodManager inputMethodManager =(InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 getActivity().onBackPressed();
             }
-        });
+        });*/
 
         //Eliminar mensaje de error mientras tiene foco de correo
         EditTextValidations.removeErrorTyping(correoEt);

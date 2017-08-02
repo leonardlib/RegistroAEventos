@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import mx.gob.jovenes.guanajuato.R;
+import mx.gob.jovenes.guanajuato.fragments.LoginFragment;
 import mx.gob.jovenes.guanajuato.fragments.StartFragment;
 
 
@@ -25,13 +26,12 @@ public class LoginActivity extends AppCompatActivity {
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        Fragment fragment = new StartFragment();
+        Fragment fragment = new LoginFragment();
         ft.replace(R.id.login_fragment_container, fragment);
         ft.commit();
-
     }
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -40,13 +40,12 @@ public class LoginActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void onBackPressed(){
         super.onBackPressed();
-    }
-
+    }*/
 
     public void startHomeActivity(){
         Intent i = new Intent(this, HomeActivity.class);
