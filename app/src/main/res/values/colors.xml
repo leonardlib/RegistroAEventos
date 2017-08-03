@@ -22,4 +22,6 @@
     <color name="black_overlay">#66000000</color>
     <color name="link_color">#00b2ff</color>
 
+    <color name="actionbar_opacity">#33000000</color>
+
 </resources>

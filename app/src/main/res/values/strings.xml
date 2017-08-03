@@ -433,6 +433,8 @@ condiciones informados en el presente aviso de privacidad.&lt;br>
     <string name="tv_empty_notificaciones">No se encontraron notificaciones</string>
     <string name="tv_empty_convocatorias">No se encontraron convocatorias</string>
 
+    <string name="registrar_a_evento">Registrar en el evento</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tv_empty_empresas">No se encontraron empresas</string>

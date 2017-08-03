@@ -26,8 +26,8 @@
 
             <TextView
                 android:id="@+id/tv_descripcion_evento"
-                android:layout_width="246dp"
-                android:layout_height="39dp"
+                android:layout_width="575dp"
+                android:layout_height="79dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
@@ -36,6 +36,7 @@
                 android:drawableStart="@drawable/ic_description_32_px"
                 android:padding="5dp"
                 android:text="Descripción del evento"
+                android:gravity="center_vertical"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -46,12 +47,13 @@
 
             <TextView
                 android:id="@+id/tv_nombre_evento"
-                android:layout_width="582dp"
-                android:layout_height="61dp"
+                android:layout_width="574dp"
+                android:layout_height="107dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
                 android:text="Nombre del evento"
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -66,8 +68,8 @@
 
             <TextView
                 android:id="@+id/tv_fechas_evento"
-                android:layout_width="246dp"
-                android:layout_height="41dp"
+                android:layout_width="573dp"
+                android:layout_height="76dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
@@ -76,6 +78,7 @@
                 android:drawableStart="@drawable/ic_evento_24_px"
                 android:padding="5dp"
                 android:text="Fecha del evento"
+                android:gravity="center_vertical"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -85,11 +88,11 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <Button
-                android:id="@+id/btn_asistencia"
+                android:id="@+id/btn_registrar_evento"
                 android:layout_width="439dp"
                 android:layout_height="64dp"
                 android:background="@drawable/bordered_button_blue"
-                android:text="Asistí al evento"
+                android:text="@string/registrar_a_evento"
                 android:textColor="@color/white"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/tv_nombre_evento"
@@ -99,13 +102,13 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginRight="8dp"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintVertical_bias="0.412"
-                tools:layout_editor_absoluteX="110dp" />
+                app:layout_constraintVertical_bias="0.62"
+                app:layout_constraintHorizontal_bias="0.503" />
 
             <TextView
                 android:id="@+id/tv_direccion_evento"
-                android:layout_width="245dp"
-                android:layout_height="38dp"
+                android:layout_width="576dp"
+                android:layout_height="81dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
@@ -114,6 +117,7 @@
                 android:drawableStart="@drawable/ic_place_white_24dp"
                 android:padding="5dp"
                 android:text="Dirección del evento"
+                android:gravity="center_vertical"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.002"

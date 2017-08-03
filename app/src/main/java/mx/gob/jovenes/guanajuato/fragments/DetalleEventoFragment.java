@@ -1,5 +1,6 @@
 package mx.gob.jovenes.guanajuato.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -18,6 +20,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.sql.SQLOutput;
 import java.text.DateFormat;
@@ -36,7 +44,7 @@ import mx.gob.jovenes.guanajuato.model.Region;
 /**
  * Created by uriel on 21/06/16.
  */
-public class DetalleEventoFragment extends Fragment implements OnMapReadyCallback{
+public class DetalleEventoFragment extends Fragment implements OnMapReadyCallback, View.OnClickListener{
     private static String ID_EVENTO = "id_evento";
     private Evento evento;
     private MapFragment mapaEvento;
@@ -45,6 +53,7 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
     private TextView tvDescripcionEvento;
     private TextView tvFechaEvento;
     private Button btnAsistencia;
+    private IntentIntegrator qrScan;
     private Realm realm;
 
     public static DetalleEventoFragment newInstance(int idEvento) {
@@ -75,18 +84,55 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
         tvDireccionEvento = (TextView) v.findViewById(R.id.tv_direccion_evento);
         tvDescripcionEvento = (TextView) v.findViewById(R.id.tv_descripcion_evento);
         tvFechaEvento = (TextView) v.findViewById(R.id.tv_fechas_evento);
-        btnAsistencia = (Button) v.findViewById(R.id.btn_asistencia);
+        btnAsistencia = (Button) v.findViewById(R.id.btn_registrar_evento);
 
         tvNombreEvento.setText(evento.getTitulo());
         tvDireccionEvento.setText(evento.getDireccion());
         tvDescripcionEvento.setText(evento.getDescripcion());
         tvFechaEvento.setText(getFechaCast(evento.getFechaInicio()) + " - " + getFechaCast(evento.getFechaFin()));
         checkAsist();
+        qrScan = new IntentIntegrator(getActivity());
+        btnAsistencia.setOnClickListener(this);
         return v;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            //if qrcode has nothing in it
+            if (result.getContents() == null) {
+                Toast.makeText(getContext(), "Result Not Found", Toast.LENGTH_LONG).show();
+            } else {
+                //if qr contains data
+                try {
+                    //converting the data to json
+                    JSONObject obj = new JSONObject(result.getContents());
+                    //setting values to textviews
+                    //textViewName.setText(obj.getString("name"));
+                    //textViewAddress.setText(obj.getString("address"));
+                    System.out.println(obj.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    //if control comes here
+                    //that means the encoded format not matches
+                    //in this case you can display whatever data is available on the qrcode
+                    //to a toast
+                    Toast.makeText(getContext(), result.getContents(), Toast.LENGTH_LONG).show();
+                }
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        qrScan.initiateScan();
+    }
+
     public void checkAsist(){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        /*SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String dateInStringbegin = getFechaCast(evento.getFechaInicio());
         String dateInStringend = getFechaCast(evento.getFechaFin());
         try {
@@ -95,16 +141,14 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
             Date date = new Date();
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date newFormat = formatter.parse(dateFormat.format(date));
-            if(newFormat.after(fechainicio) && newFormat.before(fechafin)) {
+            /*if(newFormat.after(fechainicio) && newFormat.before(fechafin)) {
                 btnAsistencia.setText("Estoy en el evento");
                  } else if(newFormat.before(fechafin)){
                 btnAsistencia.setText("Asistiré al evento");
             }
         } catch (ParseException e) {
             e.printStackTrace();
-        }
-
-
+        }*/
     }
 
     private String getFechaCast(String fecha) {
