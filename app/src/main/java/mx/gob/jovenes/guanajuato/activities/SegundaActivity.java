@@ -1,5 +1,6 @@
 package mx.gob.jovenes.guanajuato.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -32,8 +34,13 @@ import com.google.zxing.integration.android.IntentResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import mx.gob.jovenes.guanajuato.R;
+import mx.gob.jovenes.guanajuato.api.EventoAPI;
 import mx.gob.jovenes.guanajuato.api.NotificacionAPI;
 import mx.gob.jovenes.guanajuato.api.Response;
 import mx.gob.jovenes.guanajuato.application.MyApplication;
@@ -43,6 +50,7 @@ import mx.gob.jovenes.guanajuato.fragments.ChatFragment;
 import mx.gob.jovenes.guanajuato.fragments.CodigoGuanajovenFragment;
 import mx.gob.jovenes.guanajuato.fragments.AcercaDeFragment;
 import mx.gob.jovenes.guanajuato.fragments.ConvocatoriaFragment;
+import mx.gob.jovenes.guanajuato.fragments.DetalleEventoFragment;
 import mx.gob.jovenes.guanajuato.fragments.EditarDatosFragment;
 import mx.gob.jovenes.guanajuato.fragments.EmpresaFragment;
 import mx.gob.jovenes.guanajuato.fragments.NotificacionesFragment;
@@ -51,7 +59,10 @@ import mx.gob.jovenes.guanajuato.fragments.NuevoEventoDialogFragment;
 import mx.gob.jovenes.guanajuato.fragments.RedesSocialesFragment;
 import mx.gob.jovenes.guanajuato.fragments.RegionFragment;
 import mx.gob.jovenes.guanajuato.fragments.RegistrarAguaFragment;
+import mx.gob.jovenes.guanajuato.model.Evento;
+import mx.gob.jovenes.guanajuato.model.Usuario;
 import mx.gob.jovenes.guanajuato.sesion.Sesion;
+import mx.gob.jovenes.guanajuato.utils.DateUtilities;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -65,6 +76,10 @@ import retrofit2.Retrofit;
  */
 public class SegundaActivity extends AppCompatActivity {
     //public static SegundaActivity segundaActivity;
+    private EventoAPI eventoAPI;
+    private Retrofit retrofit;
+    private String token;
+    public DetalleEventoFragment detalleEventoFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -185,7 +200,12 @@ public class SegundaActivity extends AppCompatActivity {
             if (result.getContents() == null) {
                 Toast.makeText(this, "No se encontró este usuario", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(this, "Usuario registrado: " + result.getContents(), Toast.LENGTH_LONG).show();
+                retrofit = ((MyApplication) this.getApplication()).getRetrofitInstance();
+                eventoAPI = retrofit.create(EventoAPI.class);
+                token = result.getContents();
+                Activity activity = this;
+
+                detalleEventoFragment.peticionRegistrarEvento(eventoAPI, token, activity, result);
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);

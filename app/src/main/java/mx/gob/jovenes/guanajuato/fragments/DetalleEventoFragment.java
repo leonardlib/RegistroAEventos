@@ -1,10 +1,12 @@
 package mx.gob.jovenes.guanajuato.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,10 +38,17 @@ import java.util.Locale;
 
 import io.realm.Realm;
 import mx.gob.jovenes.guanajuato.R;
+import mx.gob.jovenes.guanajuato.adapters.RVEventosAdapter;
+import mx.gob.jovenes.guanajuato.api.EventoAPI;
+import mx.gob.jovenes.guanajuato.api.Response;
 import mx.gob.jovenes.guanajuato.application.MyApplication;
 import mx.gob.jovenes.guanajuato.model.Evento;
 import mx.gob.jovenes.guanajuato.model.Lugar;
 import mx.gob.jovenes.guanajuato.model.Region;
+import mx.gob.jovenes.guanajuato.model.Usuario;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
 
 /**
  * Created by uriel on 21/06/16.
@@ -93,40 +102,30 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
         checkAsist();
         qrScan = new IntentIntegrator(getActivity());
         btnAsistencia.setOnClickListener(this);
+
         return v;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        System.out.println(requestCode);
-        System.out.println(resultCode);
-        System.out.println(data);
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null) {
-            //if qrcode has nothing in it
-            if (result.getContents() == null) {
-                Toast.makeText(getContext(), "Result Not Found", Toast.LENGTH_LONG).show();
-            } else {
-                //if qr contains data
-                try {
-                    //converting the data to json
-                    JSONObject obj = new JSONObject(result.getContents());
-                    //setting values to textviews
-                    //textViewName.setText(obj.getString("name"));
-                    //textViewAddress.setText(obj.getString("address"));
-                    System.out.println(obj.toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    //if control comes here
-                    //that means the encoded format not matches
-                    //in this case you can display whatever data is available on the qrcode
-                    //to a toast
-                    Toast.makeText(getContext(), result.getContents(), Toast.LENGTH_LONG).show();
+    public void peticionRegistrarEvento(EventoAPI eventoAPI, String token, Activity activity, IntentResult result) {
+        Integer idEvento = evento.getIdEvento();
+
+        Call<Response<Usuario>> call = eventoAPI.registrar(token, idEvento);
+        call.enqueue(new Callback<Response<Usuario>>() {
+            @Override
+            public void onResponse(Call<Response<Usuario>> call, retrofit2.Response<Response<Usuario>> response) {
+                System.out.println(response);
+                if(response.body().success) {
+                    Usuario user = response.body().data;
+                    System.out.println(user);
+                    Toast.makeText(activity, "Usuario registrado: " + result.getContents(), Toast.LENGTH_LONG).show();
                 }
             }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
+
+            @Override
+            public void onFailure(Call<Response<Usuario>> call, Throwable t) {
+                Toast.makeText(activity, "No se pudo registrar este usuario, intenta de nuevo", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
