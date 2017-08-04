@@ -98,6 +98,9 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        System.out.println(requestCode);
+        System.out.println(resultCode);
+        System.out.println(data);
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             //if qrcode has nothing in it

@@ -19,12 +19,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.deser.Deserializers;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import mx.gob.jovenes.guanajuato.R;
@@ -163,6 +169,27 @@ public class SegundaActivity extends AppCompatActivity {
     public void onBackPressed() {
         this.getSupportActionBar().setTitle(R.string.app_name);
         super.onBackPressed();
+    }
+
+    /**
+     * Método para recibir el resultado de la lectura de Código QR
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
+        if (result != null) {
+            if (result.getContents() == null) {
+                Toast.makeText(this, "No se encontró este usuario", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Usuario registrado: " + result.getContents(), Toast.LENGTH_LONG).show();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     /*
