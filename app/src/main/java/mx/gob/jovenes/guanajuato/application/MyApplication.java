@@ -55,7 +55,7 @@ public class MyApplication extends MultiDexApplication {
         Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setDateFormat("d/M/yyyy").create();
 
         //Instancia de retrofit, utilizada en la app.
-         retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create(gson)).build();
+        retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create(gson)).build();
 
         //Iniciar Firebase
         Firebase.setAndroidContext(this);

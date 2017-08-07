@@ -76,10 +76,6 @@ import retrofit2.Retrofit;
  */
 public class SegundaActivity extends AppCompatActivity {
     //public static SegundaActivity segundaActivity;
-    private EventoAPI eventoAPI;
-    private Retrofit retrofit;
-    private String token;
-    public DetalleEventoFragment detalleEventoFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -184,32 +180,6 @@ public class SegundaActivity extends AppCompatActivity {
     public void onBackPressed() {
         this.getSupportActionBar().setTitle(R.string.app_name);
         super.onBackPressed();
-    }
-
-    /**
-     * Método para recibir el resultado de la lectura de Código QR
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-
-        if (result != null) {
-            if (result.getContents() == null) {
-                Toast.makeText(this, "No se encontró este usuario", Toast.LENGTH_LONG).show();
-            } else {
-                retrofit = ((MyApplication) this.getApplication()).getRetrofitInstance();
-                eventoAPI = retrofit.create(EventoAPI.class);
-                token = result.getContents();
-                Activity activity = this;
-
-                detalleEventoFragment.peticionRegistrarEvento(eventoAPI, token, activity, result);
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
     }
 
     /*

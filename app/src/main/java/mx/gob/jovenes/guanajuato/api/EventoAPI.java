@@ -21,7 +21,7 @@ public interface EventoAPI {
     );
 
     @POST("eventos/registrar")
-    Call<Response<Usuario>> registrar(
+    Call<Response<String>> registrar(
             @Query("token") String token,
             @Query("id_evento") Integer idEvento
     );

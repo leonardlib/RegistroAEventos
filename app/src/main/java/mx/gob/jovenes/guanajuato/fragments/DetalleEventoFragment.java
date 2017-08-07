@@ -64,6 +64,10 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
     private Button btnAsistencia;
     private IntentIntegrator qrScan;
     private Realm realm;
+    private EventoAPI eventoAPI;
+    private Retrofit retrofit;
+    private String token;
+    private Activity activity;
 
     public static DetalleEventoFragment newInstance(int idEvento) {
         DetalleEventoFragment detalleEventoFragment = new DetalleEventoFragment();
@@ -77,6 +81,7 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         realm = MyApplication.getRealmInstance();
+        activity = getActivity();
     }
 
     @Nullable
@@ -100,37 +105,60 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
         tvDescripcionEvento.setText(evento.getDescripcion());
         tvFechaEvento.setText(getFechaCast(evento.getFechaInicio()) + " - " + getFechaCast(evento.getFechaFin()));
         checkAsist();
-        qrScan = new IntentIntegrator(getActivity());
         btnAsistencia.setOnClickListener(this);
 
         return v;
     }
 
-    public void peticionRegistrarEvento(EventoAPI eventoAPI, String token, Activity activity, IntentResult result) {
-        Integer idEvento = evento.getIdEvento();
-
-        Call<Response<Usuario>> call = eventoAPI.registrar(token, idEvento);
-        call.enqueue(new Callback<Response<Usuario>>() {
-            @Override
-            public void onResponse(Call<Response<Usuario>> call, retrofit2.Response<Response<Usuario>> response) {
-                System.out.println(response);
-                if(response.body().success) {
-                    Usuario user = response.body().data;
-                    System.out.println(user);
-                    Toast.makeText(activity, "Usuario registrado: " + result.getContents(), Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Response<Usuario>> call, Throwable t) {
-                Toast.makeText(activity, "No se pudo registrar este usuario, intenta de nuevo", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
     @Override
     public void onClick(View view) {
-        qrScan.initiateScan();
+        //qrScan.initiateScan();
+        IntentIntegrator.forSupportFragment(this).initiateScan();
+    }
+
+    /**
+     * Método para recibir el resultado de la lectura de Código QR
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
+        if (result != null) {
+            if (result.getContents() == null) {
+                Toast.makeText(activity, "No se encontró este usuario", Toast.LENGTH_LONG).show();
+            } else {
+                retrofit = ((MyApplication) activity.getApplication()).getRetrofitInstance();
+                eventoAPI = retrofit.create(EventoAPI.class);
+                token = result.getContents();
+
+                Integer idEvento = evento.getIdEvento();
+
+                System.out.println("Token: " + token);
+                System.out.println("ID Evento: " + idEvento);
+                Call<Response<String>> call = eventoAPI.registrar(token, idEvento);
+                call.enqueue(new Callback<Response<String>>() {
+                    @Override
+                    public void onResponse(Call<Response<String>> call, retrofit2.Response<Response<String>> response) {
+                        System.out.println(response);
+                        if(response.body() != null && response.body().success) {
+                            Toast.makeText(activity, "Usuario registrado: " + response.body().data, Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(activity, "No se pudo registrar este usuario, intenta de nuevo", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Response<String>> call, Throwable t) {
+                        Toast.makeText(activity, "No se pudo registrar este usuario 2, intenta de nuevo", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     public void checkAsist(){
