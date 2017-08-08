@@ -34,6 +34,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import io.realm.Realm;
@@ -46,6 +47,7 @@ import mx.gob.jovenes.guanajuato.model.Evento;
 import mx.gob.jovenes.guanajuato.model.Lugar;
 import mx.gob.jovenes.guanajuato.model.Region;
 import mx.gob.jovenes.guanajuato.model.Usuario;
+import mx.gob.jovenes.guanajuato.utils.DateUtilities;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -133,17 +135,21 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
                 retrofit = ((MyApplication) activity.getApplication()).getRetrofitInstance();
                 eventoAPI = retrofit.create(EventoAPI.class);
                 token = result.getContents();
+                Toast toast = Toast.makeText(activity, "Realizando registro de usuario...", Toast.LENGTH_LONG);
 
                 Integer idEvento = evento.getIdEvento();
 
-                System.out.println("Token: " + token);
-                System.out.println("ID Evento: " + idEvento);
+                toast.show();
                 Call<Response<String>> call = eventoAPI.registrar(token, idEvento);
                 call.enqueue(new Callback<Response<String>>() {
                     @Override
                     public void onResponse(Call<Response<String>> call, retrofit2.Response<Response<String>> response) {
-                        System.out.println(response);
+                        toast.cancel();
                         if(response.body() != null && response.body().success) {
+                            /*realm.beginTransaction();
+                            realm.copyToRealmOrUpdate(evento);
+                            realm.commitTransaction();*/
+
                             Toast.makeText(activity, "Usuario registrado: " + response.body().data, Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(activity, "No se pudo registrar este usuario, intenta de nuevo", Toast.LENGTH_LONG).show();
@@ -152,7 +158,8 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
 
                     @Override
                     public void onFailure(Call<Response<String>> call, Throwable t) {
-                        Toast.makeText(activity, "No se pudo registrar este usuario 2, intenta de nuevo", Toast.LENGTH_LONG).show();
+                        toast.cancel();
+                        Toast.makeText(activity, "No se pudo registrar este usuario, intenta de nuevo", Toast.LENGTH_LONG).show();
                     }
                 });
             }

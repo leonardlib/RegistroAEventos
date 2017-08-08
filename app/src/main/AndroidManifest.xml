@@ -79,6 +79,7 @@
             android:name=".activities.SegundaActivity"
             android:label="@string/title_activity_segunda"
             android:screenOrientation="portrait"
+            android:parentActivityName=".activities.HomeActivity"
             android:theme="@style/ActivityStyle">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -112,8 +113,6 @@
             android:name=".activities.HelpActivity"
             android:label="@string/title_activity_help"
             android:theme="@style/ActivityStyle" />
-
-        <activity android:name=".activities.SimpleScannerActivity"></activity>
     </application>
 
 </manifest>

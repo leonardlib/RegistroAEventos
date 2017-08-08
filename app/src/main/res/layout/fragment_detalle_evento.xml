@@ -18,7 +18,7 @@
         android:name="com.google.android.gms.maps.MapFragment"
         android:id="@+id/mapa_evento"
         android:layout_width="match_parent"
-        android:layout_height="300dp"/>
+        android:layout_height="380dp"/>
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
