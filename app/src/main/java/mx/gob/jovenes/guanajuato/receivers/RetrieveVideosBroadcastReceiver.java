@@ -58,7 +58,7 @@ public class RetrieveVideosBroadcastReceiver extends BroadcastReceiver {
         am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR, localPendingIntent);
 
         context =paramContext;
-        if (ConnectionUtilities.hasWIFIConnection(context)) {
+        if (ConnectionUtilities.hasConnection(context)) {
             prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
             new RevisarFechaVideoAsyncTask().execute();
         }
@@ -75,7 +75,7 @@ public class RetrieveVideosBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(final Context context, Intent intent) {
         this.context = context;
 
-        if (ConnectionUtilities.hasWIFIConnection(context)) {
+        if (ConnectionUtilities.hasConnection(context)) {
             prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
             new RevisarFechaVideoAsyncTask().execute();
         }

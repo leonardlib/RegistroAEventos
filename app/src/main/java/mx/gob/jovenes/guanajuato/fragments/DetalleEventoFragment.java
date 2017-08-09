@@ -38,6 +38,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import io.realm.Realm;
 import mx.gob.jovenes.guanajuato.R;
@@ -143,8 +144,8 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
                 Toast toast = Toast.makeText(activity, "Realizando registro de usuario...", Toast.LENGTH_LONG);
 
                 Integer idEvento = evento.getIdEvento();
-
                 toast.show();
+
                 //Checar la conexión a internet
                 if (ConnectionUtilities.hasConnection(getContext())) {
                     Call<Response<String>> call = eventoAPI.registrar(token, idEvento);
@@ -167,8 +168,32 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
                     });
                 } else {
                     //Guardar el registro al evento en SharedPreferences
-                    String jsonRegistro = "{token: '"+ token +"', idEvento: '"+ idEvento +"'}";
-                    prefs.edit().putString("registro.evento." + idEvento + token, jsonRegistro).apply();
+                    toast.cancel();
+                    Toast.makeText(activity, "El registro se relizará cuando esté conectado a internet", Toast.LENGTH_LONG).show();
+                    JSONObject objetoPadre = new JSONObject();
+                    JSONObject objetoJson = new JSONObject();
+
+                    try {
+                        objetoJson.put("token", token);
+                        objetoJson.put("idEvento", idEvento);
+                        objetoPadre.put("" + token, objetoJson.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    String listaRegistros = prefs.getString("registro.eventos", "null");
+
+                    if (listaRegistros.equalsIgnoreCase("null")) {
+                        prefs.edit().putString("registro.eventos", objetoPadre.toString()).apply();
+                    } else {
+                        try {
+                            JSONObject objetoGuardado = new JSONObject(listaRegistros);
+                            objetoGuardado.put("" + token, objetoJson.toString());
+                            prefs.edit().putString("registro.eventos", objetoGuardado.toString()).apply();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }
         } else {
