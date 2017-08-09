@@ -2,7 +2,9 @@ package mx.gob.jovenes.guanajuato.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +45,7 @@ import mx.gob.jovenes.guanajuato.adapters.RVEventosAdapter;
 import mx.gob.jovenes.guanajuato.api.EventoAPI;
 import mx.gob.jovenes.guanajuato.api.Response;
 import mx.gob.jovenes.guanajuato.application.MyApplication;
+import mx.gob.jovenes.guanajuato.connection.ConnectionUtilities;
 import mx.gob.jovenes.guanajuato.model.Evento;
 import mx.gob.jovenes.guanajuato.model.Lugar;
 import mx.gob.jovenes.guanajuato.model.Region;
@@ -70,6 +73,7 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
     private Retrofit retrofit;
     private String token;
     private Activity activity;
+    private SharedPreferences prefs;
 
     public static DetalleEventoFragment newInstance(int idEvento) {
         DetalleEventoFragment detalleEventoFragment = new DetalleEventoFragment();
@@ -84,6 +88,7 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         realm = MyApplication.getRealmInstance();
         activity = getActivity();
+        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplication());
     }
 
     @Nullable
@@ -140,28 +145,31 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
                 Integer idEvento = evento.getIdEvento();
 
                 toast.show();
-                Call<Response<String>> call = eventoAPI.registrar(token, idEvento);
-                call.enqueue(new Callback<Response<String>>() {
-                    @Override
-                    public void onResponse(Call<Response<String>> call, retrofit2.Response<Response<String>> response) {
-                        toast.cancel();
-                        if(response.body() != null && response.body().success) {
-                            /*realm.beginTransaction();
-                            realm.copyToRealmOrUpdate(evento);
-                            realm.commitTransaction();*/
+                //Checar la conexión a internet
+                if (ConnectionUtilities.hasConnection(getContext())) {
+                    Call<Response<String>> call = eventoAPI.registrar(token, idEvento);
+                    call.enqueue(new Callback<Response<String>>() {
+                        @Override
+                        public void onResponse(Call<Response<String>> call, retrofit2.Response<Response<String>> response) {
+                            toast.cancel();
+                            if(response.body() != null && response.body().success) {
+                                Toast.makeText(activity, "Usuario registrado: " + response.body().data, Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(activity, "No se pudo registrar este usuario, intenta de nuevo", Toast.LENGTH_LONG).show();
+                            }
+                        }
 
-                            Toast.makeText(activity, "Usuario registrado: " + response.body().data, Toast.LENGTH_LONG).show();
-                        } else {
+                        @Override
+                        public void onFailure(Call<Response<String>> call, Throwable t) {
+                            toast.cancel();
                             Toast.makeText(activity, "No se pudo registrar este usuario, intenta de nuevo", Toast.LENGTH_LONG).show();
                         }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Response<String>> call, Throwable t) {
-                        toast.cancel();
-                        Toast.makeText(activity, "No se pudo registrar este usuario, intenta de nuevo", Toast.LENGTH_LONG).show();
-                    }
-                });
+                    });
+                } else {
+                    //Guardar el registro al evento en SharedPreferences
+                    String jsonRegistro = "{token: '"+ token +"', idEvento: '"+ idEvento +"'}";
+                    prefs.edit().putString("registro.evento." + idEvento + token, jsonRegistro).apply();
+                }
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);

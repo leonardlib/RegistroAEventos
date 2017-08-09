@@ -9,15 +9,13 @@ import android.net.NetworkInfo;
  */
 public class ConnectionUtilities {
 
-    public static boolean hasWIFIConnection(Context context)
-    {
+    public static boolean hasConnection(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
         NetworkInfo network = cm.getActiveNetworkInfo();
-        if (network != null && network.getType() == ConnectivityManager.TYPE_WIFI){
+
+        if (network != null && network.isConnectedOrConnecting()) {
             return true;
         }
         return false;
-
     }
 }
