@@ -103,7 +103,7 @@ public class EventoFragment extends CustomFragment {
                 tvEmptyEvento.setVisibility(View.GONE);
 
                 System.out.println(response);
-                if(response.body().success) {
+                if(response.body() != null && response.body().success) {
                     List<Evento> evn = response.body().data;
 
                     realm.beginTransaction();

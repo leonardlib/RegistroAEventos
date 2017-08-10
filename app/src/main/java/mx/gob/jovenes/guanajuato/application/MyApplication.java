@@ -7,8 +7,11 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.concurrent.TimeUnit;
+
 import io.realm.Realm;
 import mx.gob.jovenes.guanajuato.sesion.Sesion;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -38,7 +41,7 @@ public class MyApplication extends MultiDexApplication {
 
     //public static final String BASE_URL = "http://10.0.7.119/GuanajovenWeb/public/api/";
 
-    public static final String BASE_URL = "http://192.168.0.53/RegistroAEventosWeb/public/api/";
+    public static final String BASE_URL = "http://192.168.1.71/RegistroAEventosWeb/public/api/";
 
 
     /**
