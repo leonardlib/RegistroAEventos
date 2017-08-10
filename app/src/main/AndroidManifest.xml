@@ -79,8 +79,8 @@
         <activity
             android:name=".activities.SegundaActivity"
             android:label="@string/title_activity_segunda"
-            android:screenOrientation="portrait"
             android:parentActivityName=".activities.HomeActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/ActivityStyle">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -115,11 +115,13 @@
             android:label="@string/title_activity_help"
             android:theme="@style/ActivityStyle" />
 
-        <receiver android:name=".receivers.EventosBroadcastReceiver" >
+        <receiver android:name=".receivers.EventosBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".activities.ContinousCaptureActivity"></activity>
     </application>
 
 </manifest>

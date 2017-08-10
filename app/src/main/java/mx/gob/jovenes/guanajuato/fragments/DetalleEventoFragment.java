@@ -42,6 +42,7 @@ import java.util.Set;
 
 import io.realm.Realm;
 import mx.gob.jovenes.guanajuato.R;
+import mx.gob.jovenes.guanajuato.activities.ContinousCaptureActivity;
 import mx.gob.jovenes.guanajuato.adapters.RVEventosAdapter;
 import mx.gob.jovenes.guanajuato.api.EventoAPI;
 import mx.gob.jovenes.guanajuato.api.Response;
@@ -120,85 +121,13 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
 
     @Override
     public void onClick(View view) {
-        //qrScan.initiateScan();
-        IntentIntegrator.forSupportFragment(this).initiateScan();
-    }
+        //IntentIntegrator.forSupportFragment(this).initiateScan();
+        Intent intent = new Intent(getActivity(), ContinousCaptureActivity.class);
+        Bundle b = new Bundle();
+        b.putInt("idEvento", evento.getIdEvento());
+        intent.putExtras(b);
 
-    /**
-     * Método para recibir el resultado de la lectura de Código QR
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-
-        if (result != null) {
-            if (result.getContents() == null) {
-                Toast.makeText(activity, "No se encontró este usuario", Toast.LENGTH_LONG).show();
-            } else {
-                retrofit = ((MyApplication) activity.getApplication()).getRetrofitInstance();
-                eventoAPI = retrofit.create(EventoAPI.class);
-                token = result.getContents();
-                Toast toast = Toast.makeText(activity, "Realizando registro de usuario...", Toast.LENGTH_LONG);
-
-                Integer idEvento = evento.getIdEvento();
-                toast.show();
-
-                //Checar la conexión a internet
-                if (ConnectionUtilities.hasConnection(getContext())) {
-                    Call<Response<String>> call = eventoAPI.registrar(token, idEvento);
-                    call.enqueue(new Callback<Response<String>>() {
-                        @Override
-                        public void onResponse(Call<Response<String>> call, retrofit2.Response<Response<String>> response) {
-                            toast.cancel();
-                            if(response.body() != null && response.body().success) {
-                                Toast.makeText(activity, "Usuario registrado: " + response.body().data, Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(activity, "No se pudo registrar este usuario, intenta de nuevo", Toast.LENGTH_LONG).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Response<String>> call, Throwable t) {
-                            toast.cancel();
-                            Toast.makeText(activity, "No se pudo registrar este usuario, intenta de nuevo", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                } else {
-                    //Guardar el registro al evento en SharedPreferences
-                    toast.cancel();
-                    Toast.makeText(activity, "El registro se relizará cuando esté conectado a internet", Toast.LENGTH_LONG).show();
-                    JSONObject objetoPadre = new JSONObject();
-                    JSONObject objetoJson = new JSONObject();
-
-                    try {
-                        objetoJson.put("token", token);
-                        objetoJson.put("idEvento", idEvento);
-                        objetoPadre.put("" + token, objetoJson.toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    String listaRegistros = prefs.getString("registro.eventos", "null");
-
-                    if (listaRegistros.equalsIgnoreCase("null")) {
-                        prefs.edit().putString("registro.eventos", objetoPadre.toString()).apply();
-                    } else {
-                        try {
-                            JSONObject objetoGuardado = new JSONObject(listaRegistros);
-                            objetoGuardado.put("" + token, objetoJson.toString());
-                            prefs.edit().putString("registro.eventos", objetoGuardado.toString()).apply();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
+        startActivity(intent);
     }
 
     public void checkAsist(){
