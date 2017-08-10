@@ -28,6 +28,18 @@ public interface UsuarioAPI {
     );
 
     /**
+     * Login de usuario administrador
+     * @param email
+     * @param password
+     * @return
+     */
+    @POST("usuarios/login")
+    Call<Response<Usuario>> loginAdmin(
+            @Query("email") String email,
+            @Query("password") String password
+    );
+
+    /**
      * Registro de usuarios
      * @param request
      * @return

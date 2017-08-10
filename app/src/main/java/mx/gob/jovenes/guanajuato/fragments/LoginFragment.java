@@ -597,7 +597,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener {
                     //((TextInputLayout) correoEt.getParent()).setError(null);
                     if (password.length() > 0) {
                         loginSimplePd = ProgressDialog.show(getActivity(), "Iniciando sesión", "Espere un momento mientras se inicia la sesión", true);
-                        Call<Response<Usuario>> call = usuarioAPI.login(correo, password);
+                        Call<Response<Usuario>> call = usuarioAPI.loginAdmin(correo, password);
                         call.enqueue(new Callback<Response<Usuario>>() {
                             @Override
                             public void onResponse(Call<Response<Usuario>> call, retrofit2.Response<Response<Usuario>> response) {
