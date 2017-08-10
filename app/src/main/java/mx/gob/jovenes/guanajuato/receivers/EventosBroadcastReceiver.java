@@ -36,8 +36,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class EventosBroadcastReceiver extends BroadcastReceiver {
     private OkHttpClient getClient() {
         OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(5, TimeUnit.MINUTES)
-                .readTimeout(5, TimeUnit.MINUTES)
+                .connectTimeout(10, TimeUnit.MINUTES)
+                .readTimeout(10, TimeUnit.MINUTES)
                 .build();
         return client;
     }
@@ -68,9 +68,8 @@ public class EventosBroadcastReceiver extends BroadcastReceiver {
                             System.out.println("token: " + token);
                             System.out.println("evento: " + idEvento);
 
-                            String BASE_URL = "http://192.168.1.71/RegistroAEventosWeb/public/api/";
                             Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setDateFormat("d/M/yyyy").create();
-                            Retrofit retrofit = new Retrofit.Builder().client(this.getClient()).baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create(gson)).build();
+                            Retrofit retrofit = new Retrofit.Builder().client(this.getClient()).baseUrl(MyApplication.BASE_URL).addConverterFactory(GsonConverterFactory.create(gson)).build();
                             EventoAPI eventoAPI = retrofit.create(EventoAPI.class);
 
                             Call<Response<String>> call = eventoAPI.registrar(token, idEvento);
