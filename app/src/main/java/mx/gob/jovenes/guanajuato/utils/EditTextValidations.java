@@ -13,6 +13,7 @@ import android.widget.EditText;
 import java.util.Date;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
+import mx.gob.jovenes.guanajuato.sesion.Sesion;
 
 /**
  * Created by code on 4/05/16.
@@ -32,6 +33,16 @@ public class EditTextValidations {
         }
         else{
             return false;
+        }
+    }
+
+    public static boolean esCorreoUsuario(EditText editText) {
+        if (editText.getText().toString().equals(Sesion.getUsuario().getEmail())) {
+            ((TextInputLayout)editText.getParent().getParent()).setErrorEnabled(true);
+            ((TextInputLayout)editText.getParent().getParent()).setError("El correo del usuario ya está incluido, no hace falta agregarlo");
+            return false;
+        } else {
+            return true;
         }
     }
 

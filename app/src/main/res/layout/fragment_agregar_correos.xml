@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_agregar_correos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+    </FrameLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/btn_aceptar_correos_agregados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/btn_seleccionar_idiomas_aceptar"
+            android:textColor="@color/white"
+            android:background="@drawable/bordered_button_blue"
+            android:layout_margin="2dp"/>
+
+        <Button
+            android:id="@+id/btn_cancelar_correos_agregados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/btn_seleccionar_idiomas_cancelar"
+            android:textColor="@color/white"
+            android:background="@drawable/bordered_button_blue"
+            android:gravity="center"
+            android:layout_margin="2dp"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floatingbutton_agregar_correo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_agregar"
+            android:tint="@color/background_gray"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

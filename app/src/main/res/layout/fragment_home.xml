@@ -74,7 +74,7 @@
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintVertical_bias="0.496" />-->
 
-        <TextView
+        <!--<TextView
             android:id="@+id/textView14"
             android:layout_width="79dp"
             android:layout_height="43dp"
@@ -87,22 +87,23 @@
             app:layout_constraintRight_toRightOf="@+id/boton_codigo_guanajoven"
             android:layout_marginLeft="0dp"
             app:layout_constraintLeft_toLeftOf="@+id/boton_codigo_guanajoven"
-            app:layout_constraintHorizontal_bias="0.0" />
+            app:layout_constraintHorizontal_bias="0.0" />-->
 
         <TextView
             android:id="@+id/textView15"
             android:layout_width="88dp"
             android:layout_height="38dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="13dp"
             android:gravity="center_horizontal"
             android:text="@string/eventos"
+            android:textSize="20sp"
             android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@+id/boton_eventos"
             android:layout_marginLeft="8dp"
             app:layout_constraintLeft_toLeftOf="@+id/boton_eventos"
             android:layout_marginRight="0dp"
             app:layout_constraintRight_toRightOf="@+id/boton_eventos"
-            app:layout_constraintHorizontal_bias="0.846" />
+            app:layout_constraintHorizontal_bias="0.408" />
 
         <!--<TextView
             android:id="@+id/textView16"
@@ -162,7 +163,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="8dp" />-->
 
-        <Button
+        <!--<Button
             android:id="@+id/boton_codigo_guanajoven"
             android:layout_width="83dp"
             android:layout_height="84dp"
@@ -181,18 +182,15 @@
             app:layout_constraintHorizontal_bias="0.229"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="8dp"
-            app:layout_constraintVertical_bias="0.658" />
+            app:layout_constraintVertical_bias="0.658" />-->
 
-        <Button
+        <ImageButton
             android:id="@+id/boton_eventos"
-            android:layout_width="83dp"
-            android:layout_height="82dp"
+            android:layout_width="145dp"
+            android:layout_height="147dp"
             android:background="@drawable/circular_button"
-            android:drawableLeft="@drawable/ic_event_white_36dp"
-            android:paddingLeft="22.5dp"
-            android:paddingBottom="5dp"
+            android:src="@drawable/ic_evento_home"
             android:gravity="center"
-            android:paddingTop="10dp"
             android:textColor="#fff"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="8dp"
@@ -204,7 +202,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintVertical_bias="0.656" />
 
-        <Button
+        <!--<Button
             android:id="@+id/boton_convocatorias"
             android:layout_width="81dp"
             android:layout_height="82dp"
@@ -223,9 +221,9 @@
             app:layout_constraintHorizontal_bias="0.771"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="8dp"
-            app:layout_constraintVertical_bias="0.656" />
+            app:layout_constraintVertical_bias="0.656" />-->
 
-        <TextView
+        <!--<TextView
             android:id="@+id/tv_perfil"
             android:layout_width="96dp"
             android:layout_height="23dp"
@@ -238,7 +236,7 @@
             app:layout_constraintLeft_toLeftOf="@+id/boton_convocatorias"
             android:layout_marginRight="0dp"
             app:layout_constraintRight_toRightOf="@+id/boton_convocatorias"
-            app:layout_constraintHorizontal_bias="0.652" />
+            app:layout_constraintHorizontal_bias="0.652" />-->
     </android.support.constraint.ConstraintLayout>
 
 

@@ -73,6 +73,7 @@ dependencies {
     compile 'com.pusher:pusher-websocket-android:0.6.0'
     compile 'org.slf4j:slf4j-android:1.7.25'
     compile 'com.journeyapps:zxing-android-embedded:3.4.0'
+    compile 'com.jjoe64:graphview:4.2.1'
     testCompile 'junit:junit:4.12'
 }
 

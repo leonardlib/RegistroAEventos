@@ -80,7 +80,7 @@ public class HomeFragment extends CustomFragment {
     //Botones
     ImageButton botonNavigationDrawer;
     Button botonCodigoGuanajoven;
-    Button botonEventos;
+    ImageButton botonEventos;
     Button botonPromociones;
     Button botonConvocatorias;
     Button botonRedesSociales;
@@ -136,10 +136,10 @@ public class HomeFragment extends CustomFragment {
 
         //Elementos menu
         botonNavigationDrawer = (ImageButton) v.findViewById(R.id.boton_navigation_drawer);
-        botonCodigoGuanajoven = (Button) v.findViewById(R.id.boton_codigo_guanajoven);
-        botonEventos = (Button) v.findViewById(R.id.boton_eventos);
+        //botonCodigoGuanajoven = (Button) v.findViewById(R.id.boton_codigo_guanajoven);
+        botonEventos = (ImageButton) v.findViewById(R.id.boton_eventos);
         //botonPromociones = (Button) v.findViewById(R.id.boton_promociones);
-        botonConvocatorias = (Button) v.findViewById(R.id.boton_convocatorias);
+        //botonConvocatorias = (Button) v.findViewById(R.id.boton_convocatorias);
         //botonRedesSociales = (Button) v.findViewById(R.id.boton_redes_sociales);
         //botonChat = (Button) v.findViewById(R.id.boton_chat);
 

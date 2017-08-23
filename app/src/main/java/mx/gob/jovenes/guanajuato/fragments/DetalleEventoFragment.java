@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -43,6 +44,7 @@ import java.util.Set;
 import io.realm.Realm;
 import mx.gob.jovenes.guanajuato.R;
 import mx.gob.jovenes.guanajuato.activities.ContinousCaptureActivity;
+import mx.gob.jovenes.guanajuato.activities.EstadisticasActivity;
 import mx.gob.jovenes.guanajuato.adapters.RVEventosAdapter;
 import mx.gob.jovenes.guanajuato.api.EventoAPI;
 import mx.gob.jovenes.guanajuato.api.Response;
@@ -76,6 +78,10 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
     private String token;
     private Activity activity;
     private SharedPreferences prefs;
+    private TextView textViewEventoAunNoEmpieza;
+    private TextView textViewEventoCaducado;
+
+    private Button botonEstadisticas;
 
     public static DetalleEventoFragment newInstance(int idEvento) {
         DetalleEventoFragment detalleEventoFragment = new DetalleEventoFragment();
@@ -108,20 +114,31 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
         tvDescripcionEvento = (TextView) v.findViewById(R.id.tv_descripcion_evento);
         tvFechaEvento = (TextView) v.findViewById(R.id.tv_fechas_evento);
         btnAsistencia = (Button) v.findViewById(R.id.btn_registrar_evento);
+        botonEstadisticas = (Button) v.findViewById(R.id.btn_estadisticas);
+        textViewEventoAunNoEmpieza = (TextView) v.findViewById(R.id.textview_evento_aun_no_empieza);
+        textViewEventoCaducado = (TextView) v.findViewById(R.id.textview_evento_caducado);
 
         tvNombreEvento.setText(evento.getTitulo());
         tvDireccionEvento.setText(evento.getDireccion());
         tvDescripcionEvento.setText(evento.getDescripcion());
         tvFechaEvento.setText(getFechaCast(evento.getFechaInicio()) + " - " + getFechaCast(evento.getFechaFin()));
         checkAsist();
+
         btnAsistencia.setOnClickListener(this);
+
+        botonEstadisticas.setOnClickListener((View) -> {
+            Intent intent = new Intent(getActivity(), EstadisticasActivity.class);
+            Bundle b = new Bundle();
+            b.putInt("idEvento", evento.getIdEvento());
+            intent.putExtras(b);
+            startActivity(intent);
+        });
 
         return v;
     }
 
     @Override
     public void onClick(View view) {
-        //IntentIntegrator.forSupportFragment(this).initiateScan();
         Intent intent = new Intent(getActivity(), ContinousCaptureActivity.class);
         Bundle b = new Bundle();
         b.putInt("idEvento", evento.getIdEvento());
@@ -130,8 +147,8 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
         startActivity(intent);
     }
 
-    public void checkAsist(){
-        /*SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    public void checkAsist() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String dateInStringbegin = getFechaCast(evento.getFechaInicio());
         String dateInStringend = getFechaCast(evento.getFechaFin());
         try {
@@ -140,14 +157,21 @@ public class DetalleEventoFragment extends Fragment implements OnMapReadyCallbac
             Date date = new Date();
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date newFormat = formatter.parse(dateFormat.format(date));
-            /*if(newFormat.after(fechainicio) && newFormat.before(fechafin)) {
-                btnAsistencia.setText("Estoy en el evento");
-                 } else if(newFormat.before(fechafin)){
-                btnAsistencia.setText("Asistiré al evento");
+
+            boolean antesDeFecha = (newFormat.before(fechainicio));
+            boolean enFecha = (newFormat.after(fechainicio) && newFormat.before(fechafin));
+            boolean despuesDeFecha = (newFormat.after(fechafin));
+
+            if (enFecha) {
+                btnAsistencia.setVisibility(View.VISIBLE);
+            } else if (despuesDeFecha) {
+                textViewEventoCaducado.setVisibility(View.VISIBLE);
+            } else if (antesDeFecha) {
+                textViewEventoAunNoEmpieza.setVisibility(View.VISIBLE);
             }
         } catch (ParseException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     private String getFechaCast(String fecha) {

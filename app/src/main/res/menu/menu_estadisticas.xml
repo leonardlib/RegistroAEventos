@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
-        android:id="@+id/action_search"
+        android:id="@+id/item_buscar_usuarios"
         android:icon="@android:drawable/ic_menu_search"
         app:showAsAction="ifRoom|withText"
         app:actionViewClass="android.support.v7.widget.SearchView"
         android:title="Buscar en el directorio"
         />
+
+    <item
+        android:id="@+id/item_generar_excel"
+        android:icon="@drawable/ic_generar_excel"
+        app:showAsAction="always"
+        android:title="GenerarExcel"/>
+
 </menu>

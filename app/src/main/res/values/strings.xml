@@ -448,4 +448,11 @@ condiciones informados en el presente aviso de privacidad.&lt;br>
     <string name="texview_promocion_descripcion">Descripción</string>
     <string name="textview_promocion_bases">Bases</string>
     <string name="aplicar_promocion">Aplicar promoción</string>
+
+    <string name="indicativos_nombre">Nombre:\u0020</string>
+    <string name="indicativos_correo">Correo:\u0020</string>
+    <string name="indicativos_id_guanajoven">ID Guanajoven:\u0020</string>
+    <string name="evento_aun_no_comienza">El evento aún no comienza</string>
+    <string name="evento_ha_caducado">El evento ha caducado</string>
+    <string name="evento_ver_estadisticas">Ver estadísticas</string>
 </resources>
